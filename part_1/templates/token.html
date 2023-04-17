@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Token Test</title>
+    <script>
+      let token;
+
+      function getToken() {
+        const name = document.getElementById("name").value;
+        fetch("http://localhost:5000/get_auth_token", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: `name=${name}`,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.token);
+            token = data.token;
+          })
+          .catch((error) => console.error(error));
+      }
+
+      function getName() {
+        if (!token) {
+          alert("You are yet to authenticate");
+          return;
+        }
+
+        fetch("http://localhost:5000/retrieve_user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert(`User's name is ${data.user}`);
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </head>
+
+  <style>
+    body {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  </style>
+  <body>
+    <form>
+      <label for="name"></label>
+      <input type="text" id="name" name="name" />
+      <button onclick="getToken()" type="button">Submit</button>
+      <button onclick="getName()" type="button">Get Name</button>
+    </form>
+  </body>
+</html>
