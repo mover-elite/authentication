@@ -5,7 +5,7 @@ import string
 
 letters = list(string.ascii_letters)
 
-database: Dict[str, Dict[str, int]] = {}
+database: Dict[str, Dict[str, int | str]] = {}
 database["aaa@gmail.com"] = {"password": "asdf", "balance": 400}
 cookies: Dict[str, str] = {}
 
@@ -18,6 +18,6 @@ def login_user():
 
 
 def retrieve_user(cookie):
-    user = cookies.get(cookie, "")
-    user_exists = database.get(user, {})
-    return user, user_exists
+    user_email = cookies.get(cookie, "")
+    user_details = database.get(user_email, {})
+    return user_email, user_details

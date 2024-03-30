@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Financial App</title>
+    <link rel="stylesheet" href="static/index.css" />
+    <script src="static/script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>My Financial App</h1>
+      <h2>{{email}}</h2>
+      <div class="balance">
+        <h2>Balance:</h2>
+        <p id="balance">${{user['balance']}}</p>
+      </div>
+      <div class="button-container">
+        <button class="top-up-button" onclick="sendMoney('add')">Top Up</button>
+        <button class="send-money-button" onclick="sendMoney('send')">
+          Send Money
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

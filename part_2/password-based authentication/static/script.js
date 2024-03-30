@@ -12,10 +12,8 @@ function sendMoney(action) {
     .then((data) => {
       console.log(data);
       document.getElementById("balance").innerText = data["new_balance"];
-      // Handle the response data
     })
     .catch((error) => {
       console.log(error);
-      // Handle any errors that occur
     });
 }
